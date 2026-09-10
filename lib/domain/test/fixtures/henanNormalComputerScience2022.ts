@@ -6,7 +6,7 @@ export const HENAN_NORMAL_UNIVERSITY: Institution = {
   name: "河南师范大学",
 };
 
-// Representative core and restricted-elective rows from the curriculum table.
+// Representative core, elective, and coded practical-course rows from the curriculum table.
 export const HNU_COMPUTER_SCIENCE_COURSES: CourseDefinition[] = [
   {
     id: "JS010300301",
@@ -73,6 +73,18 @@ export const HNU_COMPUTER_SCIENCE_COURSES: CourseDefinition[] = [
     code: "JS010500403",
     name: "C#程序设计",
     credits: 2,
+  },
+  {
+    id: "JS010400301",
+    code: "JS010400301",
+    name: "程序设计基础实验",
+    credits: 1,
+  },
+  {
+    id: "JS010500602",
+    code: "JS010500602",
+    name: "程序设计基础课程设计",
+    credits: 1,
   },
   {
     id: "JY000900102",

@@ -20,9 +20,22 @@ export {
   type MinimumCreditEvaluationStatus,
   type MinimumCreditUncertainty,
 } from "./audit/minimumCourseCredits";
+export {
+  ACHIEVEMENT_CREDIT_STATES,
+  type AchievementCreditState,
+  type NonCourseAchievementCreditEvidence,
+  studentAchievementRecordsToCreditEvidence,
+  studentAchievementRecordToCreditEvidence,
+} from "./audit/nonCourseAchievementEvidence";
 export type { CourseDefinition } from "./courseDefinition";
 export type { CurriculumProgram } from "./curriculumProgram";
 export type { Institution } from "./institution";
+export type { NonCourseAchievementDefinition } from "./nonCourseAchievementDefinition";
+export {
+  STUDENT_ACHIEVEMENT_STATUSES,
+  type StudentAchievementRecord,
+  type StudentAchievementStatus,
+} from "./studentAchievementRecord";
 export {
   STUDENT_COURSE_STATUSES,
   type StudentCourseRecord,
