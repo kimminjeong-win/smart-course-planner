@@ -14,6 +14,13 @@ export {
   studentCourseRecordToAuditEvidence,
 } from "./audit/courseEvidence";
 export {
+  aggregateEarnedCredits,
+  type CreditAggregationInput,
+  type CreditAggregationResult,
+  type CreditAggregationUncertainty,
+  type CreditContribution,
+} from "./audit/creditAggregation";
+export {
   type CourseCreditPoolRule,
   evaluateMinimumCourseCredits,
   type MinimumCreditEvaluation,
