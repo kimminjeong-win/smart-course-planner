@@ -51,7 +51,12 @@ function collectRequired(
     if (inAllOnly) for (const c of node.courses) out.add(c);
     return;
   }
-  if (node.kind === "subjectPool" || node.kind === "excluded") return;
+  if (
+    node.kind === "subjectPool" ||
+    node.kind === "courseCreditPool" ||
+    node.kind === "excluded"
+  )
+    return;
   if (inAllOnly) {
     const mandatory = functionallyMandatoryCourses(node);
     if (mandatory !== null) {

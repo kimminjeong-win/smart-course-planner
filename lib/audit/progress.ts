@@ -136,6 +136,9 @@ function collect(
       // the owner stable).
       for (const c of r.courses) if (!required.has(c)) required.set(c, node);
       break;
+    // Evaluated from canonical earned-credit evidence, never LocalPlan placement.
+    case "courseCreditPool":
+      break;
     case "pick": {
       // No selectMin ⇒ optional: 0 slots — gates nothing, reserves nothing.
       const min = r.selectMin ?? 0;

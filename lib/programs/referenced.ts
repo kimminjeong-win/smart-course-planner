@@ -6,11 +6,11 @@ import {
   walkRule,
 } from "./index";
 
-// Explicit codes a rule tree names (lowercased). `subjectPool` matches by
-// prefix/level and `excluded` is forbidden-not-referenced, so both are skipped.
+// Explicit course lists a rule tree names (lowercased). `subjectPool` matches
+// by prefix/level and `excluded` is forbidden-not-referenced, so both are skipped.
 function collectReferenced(root: RuleNode, out: Set<string>): void {
   walkRule(root, (n) => {
-    if (n.kind === "courses") {
+    if (n.kind === "courses" || n.kind === "courseCreditPool") {
       for (const c of n.courses) out.add(c.toLowerCase());
     }
   });

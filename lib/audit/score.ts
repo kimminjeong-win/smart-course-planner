@@ -139,6 +139,8 @@ function completeOf(
   switch (r.kind) {
     case "courses":
       return isLegallyMet(node);
+    case "courseCreditPool":
+      return isLegallyMet(node);
     case "pick": {
       if (compound) {
         const met = node.children.filter(optionMet).length;

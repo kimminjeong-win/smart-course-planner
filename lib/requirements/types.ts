@@ -47,6 +47,12 @@ export const RuleNodeSchema: z.ZodType<RuleNode> = z.lazy(() =>
       courses: z.array(z.string()).min(1),
     }),
     z.object({
+      kind: z.literal("courseCreditPool"),
+      description: z.string().optional(),
+      courses: z.array(z.string()).min(1),
+      minCredits: z.number().positive(),
+    }),
+    z.object({
       kind: z.literal("excluded"),
       description: z.string().optional(),
       courses: z.array(z.string()).min(1),
@@ -74,4 +80,10 @@ export type RuleNode =
       exclusions?: string[];
     }
   | { kind: "courses"; courses: string[] }
+  | {
+      kind: "courseCreditPool";
+      description?: string;
+      courses: string[];
+      minCredits: number;
+    }
   | { kind: "excluded"; description?: string; courses: string[] };

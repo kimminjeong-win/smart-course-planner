@@ -85,6 +85,6 @@ describe("河南师范大学 2022 版计算机科学与技术（师范类）fixt
       HNU_RULE_NODE_GAPS.find(
         (gap) => gap.id === "professional-elective-credit-pool",
       )?.sourceText,
-    ).toBe("专业选修课至少选修21学分");
+    ).toBe("表2列专业教育课程选修17学分；表3备注专业选修课至少选修21学分");
   });
 });

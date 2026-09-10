@@ -77,6 +77,10 @@ function localLegalCredit(node: AuditNode): number {
         0,
         node.satisfiers.length - (node.illegalSatisfiers?.length ?? 0),
       );
+    case "courseCreditPool": {
+      const legal = node.legalSatisfiedCount ?? node.satisfiedCount ?? 0;
+      return Math.max(0, Math.min(legal, r.minCredits));
+    }
     case "all": {
       let total = 0;
       for (const c of node.children) total += localLegalCredit(c);

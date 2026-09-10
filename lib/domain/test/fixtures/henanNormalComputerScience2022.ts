@@ -74,6 +74,78 @@ export const HNU_COMPUTER_SCIENCE_COURSES: CourseDefinition[] = [
     name: "C#程序设计",
     credits: 2,
   },
+  {
+    id: "JY000900102",
+    code: "JY000900102",
+    name: "中学生心理辅导",
+    credits: 1,
+  },
+  {
+    id: "JY000900202",
+    code: "JY000900202",
+    name: "学前儿童心理辅导",
+    credits: 1,
+  },
+  {
+    id: "JY000900304",
+    code: "JY000900304",
+    name: "中学生品德发展与道德教育",
+    credits: 1,
+  },
+  {
+    id: "JY000900401",
+    code: "JY000900401",
+    name: "特殊教育概论",
+    credits: 0.5,
+  },
+  {
+    id: "JY000900504",
+    code: "JY000900504",
+    name: "教育政策与法规",
+    credits: 1,
+  },
+  {
+    id: "JY000900605",
+    code: "JY000900605",
+    name: "教师专业发展",
+    credits: 2,
+  },
+  {
+    id: "JY000900703",
+    code: "JY000900703",
+    name: "基础教育改革研究",
+    credits: 1,
+  },
+  {
+    id: "JS010900105",
+    code: "JS010900105",
+    name: "计算机学科教学设计",
+    credits: 2,
+  },
+  {
+    id: "JY000901003",
+    code: "JY000901003",
+    name: "中外基础教育比较",
+    credits: 2,
+  },
+  {
+    id: "JY000901106",
+    code: "JY000901106",
+    name: "教育科研方法",
+    credits: 1,
+  },
+  {
+    id: "JY000901206",
+    code: "JY000901206",
+    name: "中学综合实践活动设计",
+    credits: 1,
+  },
+  {
+    id: "JS010900206",
+    code: "JS010900206",
+    name: "中学信息技术学科课程标准与教材研究",
+    credits: 1,
+  },
 ];
 
 const CORE_COURSE_CODES = [
@@ -85,6 +157,23 @@ const CORE_COURSE_CODES = [
   "JS010300805",
   "JS030300305",
   "JS010800104",
+];
+
+// Curriculum table pp. 13-14: the coded teacher-education electives governed
+// by the note “教师教育选修课至少选修3学分”. The code-less 360 forum is excluded.
+export const HNU_TEACHER_EDUCATION_ELECTIVE_CODES = [
+  "JY000900102",
+  "JY000900202",
+  "JY000900304",
+  "JY000900401",
+  "JY000900504",
+  "JY000900605",
+  "JY000900703",
+  "JS010900105",
+  "JY000901003",
+  "JY000901106",
+  "JY000901206",
+  "JS010900206",
 ];
 
 export const HNU_COMPUTER_SCIENCE_PROGRAM: CurriculumProgram = {
@@ -112,9 +201,33 @@ export const HNU_COMPUTER_SCIENCE_PROGRAM: CurriculumProgram = {
           },
         ],
       },
+      {
+        kind: "courseCreditPool",
+        description: "教师教育选修课至少选修3学分",
+        courses: HNU_TEACHER_EDUCATION_ELECTIVE_CODES,
+        minCredits: 3,
+      },
     ],
   },
 };
+
+/** Conflicting statements retained verbatim instead of choosing one silently. */
+export const HNU_CURRICULUM_SOURCE_AMBIGUITIES = [
+  {
+    id: "professional-elective-credit-total",
+    sources: [
+      {
+        location: "表2 课程结构及学分构成表",
+        text: "专业教育课程：选修17学分",
+      },
+      {
+        location: "表3 专业教育课程选修部分备注",
+        text: "专业选修课至少选修21学分",
+      },
+    ],
+    disposition: "未编码为可执行毕业规则，等待培养单位确认统计口径。",
+  },
+] as const;
 
 /** Requirements present in the source but not encoded into the RuleNode fixture. */
 export const HNU_RULE_NODE_GAPS = [
@@ -125,9 +238,9 @@ export const HNU_RULE_NODE_GAPS = [
   },
   {
     id: "professional-elective-credit-pool",
-    sourceText: "专业选修课至少选修21学分",
+    sourceText: "表2列专业教育课程选修17学分；表3备注专业选修课至少选修21学分",
     reason:
-      "pick counts courses, while subjectPool cannot restrict credit counting to this explicit mixed-code elective list.",
+      "The source has a 17/21-credit ambiguity, so no executable threshold is selected.",
   },
   {
     id: "code-less-practice-requirements",

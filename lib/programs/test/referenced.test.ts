@@ -76,6 +76,21 @@ describe("referencedCodesOf", () => {
       new Set(["syde 101", "gene 123", "syde 461"]),
     );
   });
+
+  it("collects the explicit options of a course-credit pool", () => {
+    const program: Program = {
+      kind: "flexible",
+      name: "Credit Pool",
+      asOf: "2026-01-01",
+      rules: {
+        kind: "courseCreditPool",
+        courses: ["EDUC 101", "CS 100"],
+        minCredits: 1.5,
+      },
+    };
+
+    expect(referencedCodesOf(program)).toEqual(new Set(["educ 101", "cs 100"]));
+  });
 });
 
 describe("memoizedReferencedCodes", () => {

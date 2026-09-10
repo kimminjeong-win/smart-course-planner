@@ -10,6 +10,11 @@ export function describeRule(node: RuleNode): string | undefined {
   switch (node.kind) {
     case "courses":
       return undefined;
+    case "courseCreditPool":
+      return (
+        node.description ??
+        `Complete at least ${node.minCredits} credits from the following courses`
+      );
     case "all":
       return node.description ?? "Complete all of the following";
     case "excluded":

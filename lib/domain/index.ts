@@ -13,6 +13,13 @@ export {
   studentCourseRecordsToAuditEvidence,
   studentCourseRecordToAuditEvidence,
 } from "./audit/courseEvidence";
+export {
+  type CourseCreditPoolRule,
+  evaluateMinimumCourseCredits,
+  type MinimumCreditEvaluation,
+  type MinimumCreditEvaluationStatus,
+  type MinimumCreditUncertainty,
+} from "./audit/minimumCourseCredits";
 export type { CourseDefinition } from "./courseDefinition";
 export type { CurriculumProgram } from "./curriculumProgram";
 export type { Institution } from "./institution";

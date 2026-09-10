@@ -211,6 +211,12 @@ function compile(
         illegal,
       );
     }
+    case "courseCreditPool":
+      // LocalPlan merges earned, in-progress, transfer, and future placements.
+      // Counting any of them here would violate the node's earned-only contract.
+      throw new Error(
+        "courseCreditPool requires canonical earned-credit evidence",
+      );
     case "all": {
       const children = node.children.map((c) =>
         compile(c, placement, legality, equiv, unitsOf),
@@ -521,7 +527,7 @@ export interface RuleSummary {
 
 /**
  * Roll-up for headline numbers, counting each slot once: `courses` = N,
- * `pick` = selectMin, `subjectPool` = selectCount, `all` sums children.
+ * `pick` = selectMin, pools = their credit/count threshold, `all` sums children.
  * `excludedViolationCount` totals `excluded`-rule hits (don't change status;
  * surfaced so the panel can badge without re-walking).
  *
@@ -546,6 +552,16 @@ export function summarizeStep(
           0,
           satisfied - (node.illegalSatisfiers?.length ?? 0),
         ),
+        excludedViolationCount: 0,
+      };
+    }
+    case "courseCreditPool": {
+      const got = Math.min(node.satisfiedCount ?? 0, r.minCredits);
+      const legal = Math.min(node.legalSatisfiedCount ?? got, r.minCredits);
+      return {
+        needed: r.minCredits,
+        satisfied: got,
+        legalSatisfied: legal,
         excludedViolationCount: 0,
       };
     }
