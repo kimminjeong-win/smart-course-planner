@@ -2,6 +2,7 @@ import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
+const isE2E = process.env.E2E_NO_EXTERNAL_FONTS === "1";
 // Build-time env: NEXT_PUBLIC_* is always set at build (inlined into the
 // client bundle), so the CSP can bake in the Supabase origin.
 const supabaseOrigin = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
@@ -67,6 +68,11 @@ const nextConfig: NextConfig = {
   // SVG. The `icon: true` SVGR option drops the SVG's intrinsic width/height
   // so size is fully controlled by Tailwind classes on the wrapper.
   turbopack: {
+    resolveAlias: isE2E
+      ? {
+          "next/font/google": "./app/fonts.e2e.ts",
+        }
+      : undefined,
     rules: {
       "*.svg": {
         loaders: [

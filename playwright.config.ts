@@ -23,6 +23,9 @@ export default defineConfig({
   ],
   webServer: {
     command: prod ? "pnpm build && pnpm start" : "pnpm dev",
+    env: {
+      E2E_NO_EXTERNAL_FONTS: "1",
+    },
     url: "http://localhost:3000",
     // Prod runs must hit the freshly built server, never a reused dev server.
     reuseExistingServer: !process.env.CI && !prod,
